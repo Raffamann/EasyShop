@@ -81,7 +81,7 @@ public class ProductsController
     {
         try
         {
-            productDao.update(product);
+            productDao.update(id,product);// bug fixed
         }
         catch(Exception ex)
         {
@@ -108,3 +108,4 @@ public class ProductsController
         }
     }
 }
+
