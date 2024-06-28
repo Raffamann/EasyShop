@@ -45,7 +45,14 @@ public class CategoriesController
     public Category getById(@PathVariable int id)
     {
         // get the category by id
-        return categoryDao.getById(id);
+
+        Category category = categoryDao.getById(id);
+        if(category == null ) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+
+    }
+         return category;
+
     }
 
     // the url to return all products in category 1 would look like this
@@ -84,7 +91,7 @@ public class CategoriesController
     // add annotation to ensure that only an ADMIN can call this function
     @DeleteMapping ("{id}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @ResponseStatus(value = HttpStatus.NO_CONTENT)
+    @ResponseStatus(value=HttpStatus.NO_CONTENT)
     public void deleteCategory(@PathVariable int id)
     {
         // delete the category by id
@@ -105,4 +112,3 @@ public class CategoriesController
         }
     }
 }
-
